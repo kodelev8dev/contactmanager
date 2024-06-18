@@ -16,9 +16,10 @@ public class ContactManagerContext : DbContext, IContactManagerContext
     {
     }
 
-    public async Task Initialize()
+    public async Task Initialize() =>  await Database.MigrateAsync();
+
+    protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        await Database.MigrateAsync();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -36,6 +36,9 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using var scope = app.Services.CreateScope();
+await using var dbContext = scope.ServiceProvider.GetRequiredService<ContactManagerContext>();
+await dbContext.Database.MigrateAsync();
 
 
 app.Run();
