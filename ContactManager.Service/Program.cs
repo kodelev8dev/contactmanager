@@ -1,6 +1,20 @@
+using ContactManager.Service.Configuration;
+using ContactManager.Service.Context;
+using ContactManager.Service.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddOptions();
+builder.Services.Configure<ContactManagerConfiguration>(builder.Configuration.GetSection("ContactManagerConfiguration"));
+var options = builder.Services.BuildServiceProvider().GetRequiredService<IOptions<ContactManagerConfiguration>>();
+
+builder.Services.AddDbContext<IContactManagerContext, ContactManagerContext>(o =>
+{
+    o.UseSqlServer(options.Value.Database.ToConnectionString());
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,5 +35,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
 
 app.Run();

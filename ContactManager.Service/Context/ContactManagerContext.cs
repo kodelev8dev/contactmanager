@@ -7,10 +7,25 @@ public class ContactManagerContext : DbContext, IContactManagerContext
 {
     public DbSet<Contact> Contacts { get; }
 
+    public ContactManagerContext()
+    {
+    }
+
+    public ContactManagerContext(DbContextOptions<ContactManagerContext> options) :
+        base(options)
+    {
+    }
+
+    public async Task Initialize()
+    {
+        await Database.MigrateAsync();
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Contact>(entity =>
         {
+            entity.ToTable("Contacts");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.HasQueryFilter(order => !order.IsDeleted);
@@ -18,6 +33,57 @@ public class ContactManagerContext : DbContext, IContactManagerContext
             {
                 e.Id, e.Name
             });
+            entity.HasData
+            (
+                new Contact
+                {
+                    Id = 1,
+                    Name = "John Doe",
+                    Email = "iUqFP@example.com",
+                    Phone = "1234567890",
+                    Address = "123 Main St",
+                    Notes = "Test contact",
+                    IsDeleted = false,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now
+                },
+                new Contact
+                {
+                    Id = 2,
+                    Name = "Jane Doe",
+                    Email = "b2yJn@example.com",
+                    Phone = "0987654321",
+                    Address = "456 Oak St",
+                    Notes = "Test contact",
+                    IsDeleted = false,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now
+                },
+                new Contact
+                {
+                    Id = 3,
+                    Name = "John Smith",
+                    Email = "iUqFP@example.com",
+                    Phone = "1234567890",
+                    Address = "123 Main St",
+                    Notes = "Test contact",
+                    IsDeleted = false,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now
+                },
+                new Contact
+                {
+                    Id = 4,
+                    Name = "Jane Smith",
+                    Email = "b2yJn@example.com",
+                    Phone = "0987654321",
+                    Address = "456 Oak St",
+                    Notes = "Test contact",
+                    IsDeleted = true,
+                    Created = DateTime.Now,
+                    LastUpdated = DateTime.Now
+                }
+            );
         });
     }
 }
