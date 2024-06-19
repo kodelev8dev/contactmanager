@@ -6,7 +6,6 @@ namespace ContactManager.Service.Controller;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-// [Route("/api/contactmanager/")]
 
 public class ContactManagerController : ControllerBase
 {
