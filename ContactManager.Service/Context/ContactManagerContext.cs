@@ -5,7 +5,6 @@ namespace ContactManager.Service.Context;
 
 public class ContactManagerContext : DbContext, IContactManagerContext
 {
-    public DbSet<Contact> Contacts { get; }
 
     public ContactManagerContext()
     {
@@ -17,6 +16,8 @@ public class ContactManagerContext : DbContext, IContactManagerContext
     }
 
     public async Task Initialize() =>  await Database.MigrateAsync();
+
+    public DbSet<Contact> Contacts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {

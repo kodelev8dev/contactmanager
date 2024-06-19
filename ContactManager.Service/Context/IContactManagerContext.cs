@@ -5,5 +5,5 @@ namespace ContactManager.Service.Context;
 
 public interface IContactManagerContext : IInitializable
 {
-    DbSet<Contact> Contacts { get;  }
+    DbSet<Contact> Contacts { get; set; }
 }
