@@ -29,6 +29,8 @@ public class ContactManagerContext : DbContext, IContactManagerContext
             entity.ToTable("Contacts");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Created).HasDefaultValueSql("getdate()");
+            entity.Property(e => e.LastUpdated).HasDefaultValueSql("getdate()");
             entity.HasQueryFilter(order => !order.IsDeleted);
             entity.HasIndex(e => new
             {
