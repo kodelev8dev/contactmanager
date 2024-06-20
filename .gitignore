@@ -4,3 +4,7 @@ ContactManager.Service/bin/
 ContactManager.Service/obj/
 
 .idea/
+
+ContactManager.Service.Test/bin/
+
+ContactManager.Service.Test/obj/
