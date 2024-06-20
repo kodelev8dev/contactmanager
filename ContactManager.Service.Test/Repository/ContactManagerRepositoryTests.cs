@@ -22,7 +22,7 @@ public class ContactManagerRepositoryTests
 
         using var context = new ContactManagerContext(_options);
 
-        if (!context.Contacts.Any(i => i.Id == 1))
+        if (!context.Contacts.IgnoreQueryFilters().Any(i => i.Id == 1))
         {
             context.Contacts.Add(new Contact
             {
@@ -38,7 +38,7 @@ public class ContactManagerRepositoryTests
             });
         }
 
-        if (!context.Contacts.Any(i => i.Id == 2))
+        if (!context.Contacts.IgnoreQueryFilters().Any(i => i.Id == 2))
         {
             context.Contacts.Add(new Contact
             {
@@ -81,6 +81,7 @@ public class ContactManagerRepositoryTests
         var repository = new ContactRepository(context);
         var result = await repository.GetAll();
 
+        result.Should().NotBeNull();
         result.Count().Should().BeGreaterThan(0);
         result.FirstOrDefault(t => t.Id == 1).Should().BeEquivalentTo(new Contact
         {
@@ -168,7 +169,7 @@ public class ContactManagerRepositoryTests
     }
 
     [Fact]
-    public async Task UpdateTest()
+    public async Task WhenFound_UpdateTest()
     {
         using var context = new ContactManagerContext(_options);
 
@@ -207,18 +208,64 @@ public class ContactManagerRepositoryTests
     }
 
     [Fact]
-    public async Task DeleteTest()
+    public async Task WhenNotFound_UpdateTest()
     {
         using var context = new ContactManagerContext(_options);
 
         var repository = new ContactRepository(context);
-        var result = await repository.Delete(2);
+        var result = await repository.Update(new Contact
+        {
+            Id = 20,
+            Name = "Johnoy Smith",
+            Email = "iUqFP@example.com",
+            Phone = "1234567890",
+            Address = "123 Main St",
+            Notes = "Test contact",
+            IsDeleted = false,
+            Created = DateTime.Now,
+            LastUpdated = DateTime.Now
+        });
 
-        var contact = context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 2);
+        result.Should().Be(0);
+        context.Contacts.FirstOrDefault(i => i.Id == 20).Should().BeNull();
+    }
+
+    [Fact]
+    public async Task WhenFound_DeleteTest()
+    {
+        using var context = new ContactManagerContext(_options);
+
+        context.Contacts.Add(new Contact
+        {
+            Id = 20,
+            Name = "Pepe Smith",
+            Email = "iUqFP@example.com",
+            Phone = "1234567890",
+            Address = "123 Main St",
+            Notes = "Test contact",
+            IsDeleted = false,
+            Created = DateTime.Now,
+            LastUpdated = DateTime.Now
+        });
+        await context.SaveChangesAsync();
+
+        var repository = new ContactRepository(context);
+        var result = await repository.Delete(20);
 
         result.Should().BeGreaterThan(0);
-        context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 2).Should().NotBeNull();
-        context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 2).IsDeleted.Should().Be(true);
-        context.Contacts.IgnoreQueryFilters().Count(i => i.IsDeleted).Should().Be(2);
+        context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 20).Should().NotBeNull();
+        context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 20).IsDeleted.Should().Be(true);
+    }
+
+    [Fact]
+    public async Task WhenNotFound_DeleteTest()
+    {
+        using var context = new ContactManagerContext(_options);
+
+        var repository = new ContactRepository(context);
+        var result = await repository.Delete(30);
+
+        result.Should().Be(0);
+        context.Contacts.IgnoreQueryFilters().FirstOrDefault(i => i.Id == 30).Should().BeNull();
     }
 }
