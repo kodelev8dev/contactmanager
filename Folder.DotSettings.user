@@ -3,5 +3,8 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9b689732_002Dbdc4_002D4130_002Dab90_002D6f610073b153/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetAllTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::806DD92F-E869-2CC7-6304-F5CA514B588D::net8.0::ContactManager.Service.Test.Repository.ContactManagerRepositoryTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::806DD92F-E869-2CC7-6304-F5CA514B588D::net8.0::ContactManager.Service.Test.Extensions.ToConnectionStringTests.ToConnectionString_ReturnsCorrectConnectionString&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::806DD92F-E869-2CC7-6304-F5CA514B588D::net8.0::ContactManager.Service.Test.Extensions.ToConnectionStringTests.ToConnectionString_ReturnsInvalidConnectionString&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::806DD92F-E869-2CC7-6304-F5CA514B588D::net8.0::ContactManager.Service.Test.Extensions.ToConnectionStringTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
