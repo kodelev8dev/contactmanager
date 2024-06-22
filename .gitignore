@@ -8,3 +8,7 @@ ContactManager.Service/obj/
 ContactManager.Service.Test/bin/
 
 ContactManager.Service.Test/obj/
+
+ContactManager.FE.Mvc/obj/
+
+ContactManager.FE.Mvc/bin/Debug/net8.0/

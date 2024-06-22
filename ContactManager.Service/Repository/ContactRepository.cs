@@ -21,6 +21,10 @@ public class ContactRepository : IContactRepository
 
     public async Task<int> Add(Contact contact, CancellationToken cancellationToken = default)
     {
+        contact.Created = DateTime.Now;
+        contact.LastUpdated = DateTime.Now;
+        contact.IsDeleted = false;
+
         await _db.Contacts.AddAsync(contact, cancellationToken);
         return await _db.SaveChangesAsync(cancellationToken);
     }
