@@ -18,7 +18,6 @@ public class ContactsController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        var aa = await _client.GetAsync("getall");
         if (await _client.GetAsync("getall") is {StatusCode: HttpStatusCode.OK} response)
         {
             var contacts = JsonConvert.DeserializeObject<List<Contact>>(await response.Content.ReadAsStringAsync());
@@ -50,7 +49,6 @@ public class ContactsController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        var aa = await _client.GetAsync("GetById?id=" + id);
         if (await _client.GetAsync("GetById?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
         {
             var contact = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
@@ -79,5 +77,15 @@ public class ContactsController : Controller
     {
         await _client.PostAsync($"deletecontact?id={id}", new StringContent(String.Empty));
         return RedirectToAction("Index", "Contacts");
+    }
+
+    public async Task<IActionResult> Map(int id)
+    {
+        if (await _client.GetAsync("GetContactMap?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        {
+            var mapPng = await response.Content.ReadAsStreamAsync();
+            return File(mapPng, "image/png");
+        }
+        return NotFound();
     }
 }
