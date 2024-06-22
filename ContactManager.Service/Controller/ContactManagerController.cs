@@ -17,7 +17,7 @@ public class ContactManagerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("all")]
+    // [Route("all")]
     public async Task<IActionResult> GetAll(CancellationToken cancellationToken = default)
     {
         if (await _repository.GetAll(cancellationToken) is {} result &&
@@ -30,7 +30,7 @@ public class ContactManagerController : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id:int}")]
+    // [Route("{id:int}")]
     public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken = default)
     {
         if (await _repository.GetById(id, cancellationToken) is {} result )
@@ -64,7 +64,7 @@ public class ContactManagerController : ControllerBase
     }
 
     [HttpPost]
-    [Route("{id:int}")]
+    // [Route("{id:int}")]
     public async Task<IActionResult> DeleteContact(int id, CancellationToken cancellationToken = default)
     {
         if (await _repository.Delete(id, cancellationToken) is {} result && result > 0)
