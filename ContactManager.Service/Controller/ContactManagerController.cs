@@ -55,7 +55,7 @@ public class ContactManagerController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> UpdateContact([FromBody] Contact contact, CancellationToken cancellationToken = default)
     {
-        if (await _repository.Add(contact, cancellationToken) is { } result && result > 0)
+        if (await _repository.Update(contact, cancellationToken) is { } result && result > 0)
         {
             return Ok();
         }
