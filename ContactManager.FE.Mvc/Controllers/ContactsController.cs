@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text;
 using ContactManager.FE.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -27,8 +28,56 @@ public class ContactsController : Controller
         return View();
     }
 
-    public async Task<IActionResult> Create(int id)
+    public IActionResult Create()
     {
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(Contact contact)
+    {
+        if (!ModelState.IsValid) return View(contact);
+
+        var content = new StringContent(JsonConvert.SerializeObject(contact), Encoding.UTF8, "application/json");
+        var response = await _client.PostAsync("addcontact", content);
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+
+        return RedirectToAction("Index", "Contacts");
+    }
+
+    public async Task<IActionResult> Edit(int id)
+    {
+        var aa = await _client.GetAsync("GetById?id=" + id);
+        if (await _client.GetAsync("GetById?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        {
+            var contact = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
+            return View(contact);
+        }
+
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(Contact contact)
+    {
+        if (!ModelState.IsValid) return View(contact);
+
+        var content = new StringContent(JsonConvert.SerializeObject(contact), Encoding.UTF8, "application/json");
+        var response = await _client.PostAsync("updatecontact", content);
+        if (response.IsSuccessStatusCode)
+        {
+            return RedirectToAction("Index");
+        }
+
+        return RedirectToAction("Index", "Contacts");
+    }
+
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _client.PostAsync($"deletecontact?id={id}", new StringContent(String.Empty));
+        return RedirectToAction("Index", "Contacts");
     }
 }

@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-8 mx-auto rounded border p-3">
-        <h2 class="text-center">Create Contact</h2>
+        <h2 class="text-center">Edit Contact</h2>
 
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Name</label>
                 <div class="col-sm-8">
@@ -48,7 +48,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 <div class="col-sm-4 d-grid">
-                    <a class="btn btn-outline-danger"
+                    <a class="btn btn-outline-primary"
                        asp-controller="Contacts"
                        asp-action="Index"
                        role="button"

@@ -7,15 +7,15 @@ public class Contact
 {
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "The email address is required")]
+    [Required(ErrorMessage = "The Name field is required")]
     [StringLength(100, ErrorMessage = "Name is too long")]
     public string Name { get; set; }
 
-    [Required(ErrorMessage = "The email address is required")]
+    [Required(ErrorMessage = "The Email address is required")]
     [EmailAddress(ErrorMessage = "Invalid Email Address")]
     public string Email { get; set; }
 
-    [Required(ErrorMessage = "The email address is required")]
+    [Required(ErrorMessage = "The Phone number is required")]
     [StringLength(100, ErrorMessage = "Name is too long")]
     public string Phone { get; set; }
 

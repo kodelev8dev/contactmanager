@@ -42,7 +42,12 @@
                     <a class="btn btn-primary btn-sm" asp-controller="Contacts" asp-action="Edit" asp-route-id="@contact.Id">Edit</a>
                 </td>
                 <td>
-                    <a class="btn btn-danger btn-sm" asp-controller="Contacts" asp-action="Delete" asp-route-id="@contact.Id">Delete</a>
+                    <a class="btn btn-danger btn-sm"
+                       asp-controller="Contacts"
+                       asp-action="Delete"
+                       asp-route-id="@contact.Id"
+                       onclick="return confirm('Are you sure you want to delete this contact?')"
+                    >Delete</a>
                 </td>
             </tr>
         }
