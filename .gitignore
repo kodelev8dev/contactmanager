@@ -12,3 +12,8 @@ ContactManager.Service.Test/obj/
 ContactManager.FE.Mvc/obj/
 
 ContactManager.FE.Mvc/bin/Debug/net8.0/
+/ContactManager.Service/.vs/ContactManager.Service/DesignTimeBuild/.dtbcache.v2
+/ContactManager.Service/.vs/ContactManager.Service/FileContentIndex/11702d0b-68a4-4632-accd-89577a95977d.vsidx
+/ContactManager.Service/.vs/ContactManager.Service/v17/.suo
+*.suo
+/.vs/ContactManager.Service/v17/DocumentLayout.json
