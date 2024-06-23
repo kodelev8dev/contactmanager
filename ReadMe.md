@@ -1,4 +1,7 @@
-**Full Stack .NET Coding Challenge**
+
+
+## Full Stack .NET Coding Challenge
+
 **Objective**
 Your objective is to create a Contact Manager MVC Web App using .NET 8. The look and feel are at 
 your discretion if the application feature requirements are met. This should function like an address 
@@ -41,99 +44,192 @@ ContactManager.Service, an API service that provides the following APIs
 for contacts: Index, Create, GetByID, Update, Delete, and
 SearchByCriteria.
 
-> **Framework Use**
+# Functionalities
 
--   Asp dot Net Core
 
--   Net 8
-
-> **Packages**
-
--   Microsoft.EntityFrameworkCore
-
--   Microsoft.EntityFrameworkCore.Design
-
--   Microsoft.EntityFrameworkCore.SqlServer
-
--   Microsoft.EntityFrameworkCore.SqlServer.Design
-
--   Swashbuckle.AspNetCore
-
--   gmaps-api-net
-
-> **Functionalities**
-
--   GetAll -- list all contacts
-
--   GetById -- select a contact record by Id
-
--   AddContact -- create a new contact record
-
--   UpdateContact -- update a contact record
-
--   DeleteContact -- delete a contact record
-
--   GetContactMap -- get address location from google map
-
--   GetBySearchCriteria -- search in the different columns
-
-> **FrontEnd**
->
-> ContactManager.FE.Mvc is a web application for displaying, creating,
-> updating, deleting, and searching for contacts.
->
-> **Framework Use**
-
--   Asp Net Core Web APP Razor MVC
-
--   Net 8
-
-> **Packages**
-
--   Newtonsoft.Json
-
-> **Unit Test**
->
-> ContactManager.Service.Test for unit testing to ensure all endpoints
-> and APIs are working correctly.
->
-> **Framework Use**
-
--   Asp Net Core APP
-
--   XUnit
-
--   Net 8
-
-> **Packages**
-
--   Coverlet.collector
-
--   FluentAssertions
-
--   Microsoft.Entity.Core.InMemory
-
--   Microsoft.Net.Test.SDK
-
--   NSubtitute
-
--   Xunit
-
--   Xunit.runner.visualstudio
+##  GetAll
 
  
--   Unit Test Created for the repository
 
-    -   GetAllTests
+**list all contacts**
 
-    -   GetByIdTest
+```
+Endpoint: GetAll
+Route: api/ContactManager/getall
+Method: GET
+Payload: none
+Result:  [
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "iUqFP@example.com",
+    "phone": "1234567890",
+    "address": "123 Main St",
+    "notes": "Test contact",
+    "isDeleted": false,
+    "created": "2024-06-18T17:04:36.643007",
+    "lastUpdated": "2024-06-18T17:04:36.64301"
+  }
+]
+```
 
-    -   GetByAnySearchTest
 
-    -   AddTest
 
-    -   UpdateTest
+##  GetById
 
-    -   DeleteTest
+ **select a contact record by Id**
+```
+Endpoint: GetById
+Route: api/ContactManager/getbyid
+Method: GET
+Payload: Id
+Payload Description: Id is an int, representing the Id of the Contact record being searched. To be passed as part of the query string.
+Call Example: api/contacts/getbyid?id=1
+Result:  
 
--   Unit Test for Connection String Extension
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "iUqFP@example.com",
+      "phone": "1234567890",
+      "address": "123 Main St",
+      "notes": "Test contact",
+      "isDeleted": false,
+      "created": "2024-06-18T17:04:36.643007",
+      "lastUpdated": "2024-06-18T17:04:36.64301"
+    }
+
+``` 
+
+
+ 
+
+##  AddContact
+
+ **create a new contact record**
+```
+Endpoint: AddContact
+Route: api/ContactManager/AddContact
+Method: Post
+Payload: Contact Object
+Payload Description:  Information details of Contacts 
+Call Example: api/contacts/addcontact
+Request body:
+
+    POST /api/ContactManager/AddContact HTTP/1.1
+    Host: localhost:5001
+    Content-Type: application/json
+    Content-Length: 236
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "iUqFP@example.com",
+      "phone": "1234567890",
+      "address": "123 Main St",
+      "notes": "Test contact",
+      "isDeleted": false,
+      "created": "2024-06-18T17:04:36.643007",
+      "lastUpdated": "2024-06-18T17:04:36.64301"
+    }
+
+Result: Status Code 200
+```
+
+##  UpdateContact 
+****update a contact record****
+```
+
+Endpoint: UpdateContact 
+Route: api/ContactManager	/updatecontact
+Method: POST
+Payload: Id
+Payload Descitpion: Id is an int, representing the Id of the Contact record being searched. To be passed as part of query string.
+Call Example: api/contacts/getbyid?id=1
+Request body:
+
+    POST /api/ContactManager/updatecontact HTTP/1.1
+    Host: localhost:5001
+    Content-Type: application/json
+    Content-Length: 235
+    
+    {
+      "id":1,
+     "name": "John Doe",
+     "email": "iUqFP@example.com",
+     "phone": "1234567890",
+     "address": "123 Main St",
+     "notes": "Test contact",
+     "isDeleted": false,
+     "created": "2024-06-18T17:04:36.643007",
+     "lastUpdated": "2024-06-18T17:04:36.64301"
+    }
+
+Result: Status Code 200
+
+```
+
+
+##  DeleteContact
+
+ **delete a contact record**
+
+```
+Endpoint: DeleteContact
+Route: api/ContactManager/DeleteContact
+Method: POST
+Payload: Id
+Payload Description: Id is an int, representing the Id of the Contact record being searched. To be passed as part of the query string.
+Call Example: api/ContactManager/DeleteContact?id=3
+Result: Status Code 200
+
+``` 
+
+  
+
+## GetContactMap
+
+ **get address location from google map**
+```
+Endpoint: GetContactMap
+Route: api/ContactManager/GetContactMap
+Method: GET
+Payload: Id
+Payload Description: Id is an int, representing the Id of the Contact record being searched. To be passed as part of the query string.
+Call Example: api/ContactManager/GetContactMap?id=3
+Result: Status Code 200 / image/png
+
+``` 
+
+
+##  GetBySearchCriteria
+
+ **search in the different columns**
+```
+Endpoint: GetBySearchCriteria
+Route: api/ContactManager/GetBySearchCriteria
+Method: GET
+Payload: searchString
+Payload Description: Id is an int, representing the Id of the Contact record being searched. To be passed as part of the query string.
+Call Example: api/ContactManager/GetBySearchCriteria?searchString=John
+Result: 
+ 
+
+    {
+          "id": 1,
+          "name": "John Doe",
+          "email": "iUqFP@example.com",
+          "phone": "1234567890",
+          "address": "123 Main St",
+          "notes": "Test contact",
+          "isDeleted": false,
+          "created": "2024-06-18T17:04:36.643007",
+          "lastUpdated": "2024-06-18T17:04:36.64301"
+        }
+
+``` 
+
+## FrontEnd
+
+>
+>ContactManager.FE.Mvc is an application created to consume the api exposed by the service. It is writing in C# using asp.net core web framework
+>
