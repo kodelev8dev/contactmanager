@@ -24,3 +24,6 @@ ContactManager.FE.Mvc/bin/Debug/net8.0/
 /ContactManager.Service/.vs/ContactManager.Service/v17/TestStore/0/testlog.manifest
 *.v2
 /.vs/ContactManager.Service/v17/TestStore/0
+/.vs/ProjectEvaluation/contactmanager.service.metadata.v8.bin
+/.vs/ProjectEvaluation/contactmanager.service.projects.v8.bin
+/.vs/ProjectEvaluation/contactmanager.service.strings.v8.bin
