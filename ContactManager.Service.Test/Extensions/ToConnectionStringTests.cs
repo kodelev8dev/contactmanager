@@ -21,7 +21,7 @@ public class ToConnectionStringTests
         var result = database.ToConnectionString();
 
         result.Length.Should().BeGreaterThan(0);
-        result.Should().Match("Server=localhost,1433;Database=ContactManager;User Id=sa;Password=password;TrustServerCertificate=true");
+        result.Should().Match("Server=localhost,1433;Database=ContactManager;User Id=sa;Password=password;Trusted_connection=true;TrustServerCertificate=true");
     }
 
     [Fact]
@@ -38,6 +38,6 @@ public class ToConnectionStringTests
         var result = database.ToConnectionString();
 
         result.Length.Should().BeGreaterThan(0);
-        result.Should().NotMatch("Server=localhost,1433;Database=ContactManager;User Id=sa;Password=password;TrustServerCertificate=true");
+        result.Should().NotMatch("Server=localhost,1433;Database=ContactManager;User Id=sa;Password=password;Trusted_connection=true;TrustServerCertificate=true");
     }
 }

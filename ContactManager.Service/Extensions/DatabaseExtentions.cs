@@ -2,6 +2,7 @@ using ContactManager.Service.Configuration;
 
 namespace ContactManager.Service.Extensions;
 
+//this extension allows the database connections string to make dynamic also in database migrations
 public static class DatabaseExtentions
 {
     public static string ToConnectionString(this Database database) =>
