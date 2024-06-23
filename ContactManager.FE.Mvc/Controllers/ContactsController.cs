@@ -1,8 +1,8 @@
-using System.Net;
-using System.Text;
 using ContactManager.FE.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 
 namespace ContactManager.FE.Mvc.Controllers;
 
@@ -16,9 +16,23 @@ public class ContactsController : Controller
     }
 
     // GET
-    public async Task<IActionResult> Index()
+    // Funtionalities of Contac controller
+
+    // Index  returns all records from contacts or the search records from contacts
+    public async Task<IActionResult> Index(string? searchString)
     {
-        if (await _client.GetAsync("getall") is {StatusCode: HttpStatusCode.OK} response)
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            if (await _client.GetAsync("GetBySearchCriteria?searchString=" + searchString) is { StatusCode: HttpStatusCode.OK } serresponse)
+            {
+                var contacts = JsonConvert.DeserializeObject<List<Contact>>(await serresponse.Content.ReadAsStringAsync());
+
+                return View(contacts);
+            }
+        }
+
+        if (await _client.GetAsync("getall") is { StatusCode: HttpStatusCode.OK } response)
         {
             var contacts = JsonConvert.DeserializeObject<List<Contact>>(await response.Content.ReadAsStringAsync());
             return View(contacts);
@@ -27,11 +41,13 @@ public class ContactsController : Controller
         return View();
     }
 
+    // Create -  return to create page
     public IActionResult Create()
     {
         return View();
     }
 
+    // Create allows to create new contact
     [HttpPost]
     public async Task<IActionResult> Create(Contact contact)
     {
@@ -47,9 +63,10 @@ public class ContactsController : Controller
         return RedirectToAction("Index", "Contacts");
     }
 
+    // Edit -  return to create Edit
     public async Task<IActionResult> Edit(int id)
     {
-        if (await _client.GetAsync("GetById?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        if (await _client.GetAsync("GetById?id=" + id) is { StatusCode: HttpStatusCode.OK } response)
         {
             var contact = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
             return View(contact);
@@ -58,6 +75,7 @@ public class ContactsController : Controller
         return View();
     }
 
+    // Edit allows to update  contact
     [HttpPost]
     public async Task<IActionResult> Edit(Contact contact)
     {
@@ -73,15 +91,17 @@ public class ContactsController : Controller
         return RedirectToAction("Index", "Contacts");
     }
 
+    // Edit allows to update  contact
     public async Task<IActionResult> Delete(int id)
     {
         await _client.PostAsync($"deletecontact?id={id}", new StringContent(String.Empty));
         return RedirectToAction("Index", "Contacts");
     }
 
+    // Map - get Address location on google maps and return to image
     public async Task<IActionResult> Map(int id)
     {
-        if (await _client.GetAsync("GetContactMap?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        if (await _client.GetAsync("GetContactMap?id=" + id) is { StatusCode: HttpStatusCode.OK } response)
         {
             var mapPng = await response.Content.ReadAsStreamAsync();
             return File(mapPng, "image/png");

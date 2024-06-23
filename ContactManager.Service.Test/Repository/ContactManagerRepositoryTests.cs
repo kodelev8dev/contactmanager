@@ -133,6 +133,29 @@ public class ContactManagerRepositoryTests
         }
     }
 
+
+    [Theory]
+    [InlineData("Jane")]
+    [InlineData("John")]
+    [InlineData("Pepe")]
+    public async Task GetByAnySearchTest(string search)
+    {
+        using var context = new ContactManagerContext(_options);
+
+        var repository = new ContactRepository(context);
+        var result = await repository.GetBySearchCriteria(search);
+
+        if (new string[] { "Jane", "John" }.Contains(search))
+        {
+            result.Should().NotBeNull();
+            result.Count().Should().BeGreaterThan(0);
+        }
+        if (search == "Pepe")
+        {
+            result.Count().Should().Be(0);
+        }
+    }
+
     [Fact]
     public async Task AddTest()
     {
@@ -165,7 +188,7 @@ public class ContactManagerRepositoryTests
             IsDeleted = false,
             Created = DateTime.Now,
             LastUpdated = DateTime.Now
-        }, e => e.Excluding(p => p.Created).Excluding(p => p.LastUpdated));;
+        }, e => e.Excluding(p => p.Created).Excluding(p => p.LastUpdated)); ;
     }
 
     [Fact]

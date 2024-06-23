@@ -9,4 +9,5 @@ public interface IContactRepository
     Task<int> Add(Contact contact, CancellationToken cancellationToken = default);
     Task<int> Update(Contact contact, CancellationToken cancellationToken = default);
     Task<int> Delete(int id, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Contact>> GetBySearchCriteria(string searchString, CancellationToken cancellationToken = default);
 }

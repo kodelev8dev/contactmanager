@@ -12,7 +12,7 @@ public class Contact
     public string Name { get; set; }
 
     [Required(ErrorMessage = "The Email address is required")]
-    [EmailAddress(ErrorMessage = "Invalid Email Address")]
+    [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Provide a valid EmailAddress")]
     public string Email { get; set; }
 
     [Required(ErrorMessage = "The Phone number is required")]
