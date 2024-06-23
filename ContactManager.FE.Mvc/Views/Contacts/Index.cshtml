@@ -14,7 +14,7 @@
     <div class="text-center">
         <div class="container text-right">
             <div class="row">
-                <div class="col" style="max-width:1000px;">
+                <div class="col" style="max-width:1090px;">
                     <form asp-controller="Contacts" asp-action="Index" method="get" class="row gy-1 gx-2 align-items-center" >
                         @* <div class="col-auto"> *@
                         <div class="col-auto">
@@ -46,6 +46,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -59,8 +60,7 @@
                         <td>@contact.Address</td>
                         <td align="right">
                             <a class="btn btn-primary btn-sm" asp-controller="Contacts" asp-action="Edit" asp-route-id="@contact.Id" id="edit_@{
-                            @contact.Id
-}">Edit</a> |
+                            @contact.Id}">Edit</a>
                         </td>
                         <td align="left">
                             <a class="btn btn-danger btn-sm"
