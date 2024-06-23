@@ -17,3 +17,5 @@ ContactManager.FE.Mvc/bin/Debug/net8.0/
 /ContactManager.Service/.vs/ContactManager.Service/v17/.suo
 *.suo
 /.vs/ContactManager.Service/v17/DocumentLayout.json
+/ContactManager.Service/.vs/ContactManager.Service/FileContentIndex/35c00b54-4f09-42e4-bb22-d7557968b100.vsidx
+/.vs/ContactManager.Service/config/applicationhost.config
