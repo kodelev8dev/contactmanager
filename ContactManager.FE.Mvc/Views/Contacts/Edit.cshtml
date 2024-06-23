@@ -2,36 +2,36 @@
 
 <!DOCTYPE html>
 
-<div class="row">
-    <div class="col-md-8 mx-auto rounded border p-3">
+<div class="row" style="margin-bottom:100px;">
+    <div class="col-lg-12 mx-auto rounded border p-3">
         <h2 class="text-center">Edit Contact</h2>
 
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="form-edit">
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Name</label>
                 <div class="col-sm-8">
-                    <input asp-for="Name" class="form-control"/>
+                    <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Email</label>
                 <div class="col-sm-8">
-                    <input asp-for="Email" class="form-control"/>
+                    <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Phone</label>
                 <div class="col-sm-8">
-                    <input asp-for="Phone" class="form-control"/>
+                    <input asp-for="Phone" class="form-control" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Address</label>
                 <div class="col-sm-8">
-                    <input asp-for="Address" class="form-control"/>
+                    <input asp-for="Address" class="form-control" />
                     <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
             </div>
@@ -39,14 +39,14 @@
             @if (!string.IsNullOrWhiteSpace(@Model.Address))
             {
                 <div class="row mb-3">
-                    <td><img src="@Url.Action("Map", "Contacts", new {id=@Model.Id})" alt=“” /></td>
+                    <img src="@Url.Action("Map", "Contacts", new {id=@Model.Id})" alt=“” class="map" />
                 </div>
             }
 
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Notes</label>
                 <div class="col-sm-8">
-                    <input asp-for="Notes" class="form-control" rows="4"/>
+                    <input asp-for="Notes" class="form-control" rows="4" />
                     <span asp-validation-for="Notes" class="text-danger"></span>
                 </div>
             </div>
@@ -60,12 +60,9 @@
                        asp-controller="Contacts"
                        asp-action="Index"
                        role="button"
-                       onclick="return confirm('Are you sure you want to cancel? Changes will be lost!!!')"
-                    >Cancel</a>
+                       onclick="return confirm('Are you sure you want to cancel? Changes will be lost!!!')">Cancel</a>
                 </div>
             </div>
-
-
         </form>
     </div>
 </div>

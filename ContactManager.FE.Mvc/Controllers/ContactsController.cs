@@ -1,8 +1,8 @@
-using System.Net;
-using System.Text;
 using ContactManager.FE.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 
 namespace ContactManager.FE.Mvc.Controllers;
 
@@ -18,7 +18,7 @@ public class ContactsController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        if (await _client.GetAsync("getall") is {StatusCode: HttpStatusCode.OK} response)
+        if (await _client.GetAsync("getall") is { StatusCode: HttpStatusCode.OK } response)
         {
             var contacts = JsonConvert.DeserializeObject<List<Contact>>(await response.Content.ReadAsStringAsync());
             return View(contacts);
@@ -49,7 +49,7 @@ public class ContactsController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        if (await _client.GetAsync("GetById?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        if (await _client.GetAsync("GetById?id=" + id) is { StatusCode: HttpStatusCode.OK } response)
         {
             var contact = JsonConvert.DeserializeObject<Contact>(await response.Content.ReadAsStringAsync());
             return View(contact);
@@ -81,7 +81,7 @@ public class ContactsController : Controller
 
     public async Task<IActionResult> Map(int id)
     {
-        if (await _client.GetAsync("GetContactMap?id=" + id) is {StatusCode: HttpStatusCode.OK} response)
+        if (await _client.GetAsync("GetContactMap?id=" + id) is { StatusCode: HttpStatusCode.OK } response)
         {
             var mapPng = await response.Content.ReadAsStreamAsync();
             return File(mapPng, "image/png");
