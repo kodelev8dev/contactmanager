@@ -36,15 +36,15 @@ enables users to create, update, and delete contacts. **Requirements**
     -   Note: Ensure the correct connection string is used in the
         appsettings.json under the ContactManager.Service project.
 
-**Software components created:**
+## Software components created:
 
-**Backend Service**
+## Backend Service
 
 ContactManager.Service, an API service that provides the following APIs
 for contacts: Index, Create, GetByID, Update, Delete, and
 SearchByCriteria.
 
-# Functionalities
+## Functionalities
 
 
 ##  GetAll
