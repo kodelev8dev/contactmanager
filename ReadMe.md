@@ -233,3 +233,71 @@ Result:
 >
 >ContactManager.FE.Mvc is an application created to consume the api exposed by the service. It is writing in C# using asp.net core web framework
 >
+**Index Page**
+- Displays all list of contacts.
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/Index.png?raw=true)
+
+**Create Contact Page**
+- Click _New Contact_.
+- Enter all Contact details.
+- Click Submit.
+- Check the created contact.
+
+######  Create Contact Form
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/CreateContactForm.png?raw=true)
+ 
+ 
+
+
+###### Created Contact Details
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/CreatedContact.png?raw=true)
+
+**Update Contact Page**
+- Click _Edit_ button from the row you want to update.
+- Update the Contact details.
+- Click Submit.
+- Check the updated contact.
+
+
+######  Update Contact Form
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/UpdateContactForm.png?raw=true)
+
+
+
+
+###### Updated Contact Details
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/UpdatedContact.png?raw=true)
+
+
+**Delete Contact Page**
+- Click _Delete_ button from the row you want to delete.
+- Update the Contact details.
+- Click Submit.
+- Click _Yes_.
+
+######  Delete Contact 
+
+![alt text](https://github.com/kodelev8dev/contactmanager/blob/main/Screenshots/delete.png?raw=true)
+
+
+# Time Estimations
+###### Randy
+* Backend Development - 5 hours
+* Front Development - 10 hours
+* Total hours - 15 hours
+
+###### Emerson
+* Backend Development - 3 hours
+* Front Development - 5 hours
+* Testing - 1 hour
+* Create Document - 1
+* Total hours - 10 hours
+
+## Total hours
+25 Hours
+
